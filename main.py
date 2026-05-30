@@ -1,4 +1,3 @@
-# ЗМІНЕНО: Імпортуємо session та init_db з файлу database.py
 from database import session, init_db
 from models import Subject, Teacher, Class, Student, Schedule, Grade
 import datetime
@@ -44,12 +43,12 @@ def add_student():
     class_name = input("Клас: ")
     school_class = session.query(Class).filter_by(name=class_name).first()
     if not school_class:
-        print(" ❌ Клас не знайдено!")
+        print("Клас не знайдено!")
         return
     student = Student(first_name=first, last_name=last, school_class=school_class)
     session.add(student)
     session.commit()
-    print(" Учня додано!")
+    print("Учня додано!")
 
 def add_schedule():
     day = input("День тижня: ")
@@ -74,7 +73,7 @@ def add_schedule():
         session.commit()
         print(" Заняття додано!")
     except ValueError:
-        print(" Неправильний формат часу! Використовуйте HH:MM (наприклад, 08:30)")
+        print("Неправильний формат часу! Використовуйте HH:MM (наприклад, 08:30)")
 
 def add_grade():
     student_last = input("Прізвище учня: ")
@@ -86,7 +85,7 @@ def add_grade():
     subject = session.query(Subject).filter_by(name=subj_name).first()
 
     if not student or not subject:
-        print("  Перевірте дані! Учень або предмет не знайдені.")
+        print("Перевірте дані! Учень або предмет не знайдені.")
         return
 
     try:
@@ -94,7 +93,7 @@ def add_grade():
         grade = Grade(value=value, date=parsed_date, student=student, subject=subject)
         session.add(grade)
         session.commit()
-        print(" Оцінку додано!")
+        print("Оцінку додано!")
     except ValueError:
         print(" Неправильний формат дати! Використовуйте YYYY-MM-DD (наприклад, 2026-05-30)")
 
