@@ -3,5 +3,11 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 engine = create_engine('sqlite:///school.db', echo=False)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Session = sessionmaker(bind=engine)
+
+session = Session()
+
 Base = declarative_base()
+
+def init_db():
+    Base.metadata.create_all(engine)
