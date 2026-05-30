@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Time
 from sqlalchemy.orm import relationship
-# ЗМІНЕНО: Імпортуємо Base з файлу database.py
 from database import Base
 
 class Subject(Base):
